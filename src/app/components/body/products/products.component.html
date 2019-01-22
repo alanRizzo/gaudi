@@ -1,0 +1,37 @@
+<div class="title">
+  <h2>Productos</h2>
+</div>
+<h3>Recorré nuestro catálogo de productos y hacé click en las fotos para más información.</h3>
+<br>
+
+<div class="row">
+  <div class="col-md-4" *ngFor="let product of products">
+
+    <!--Figure trigger modal-->
+    <figure>
+      <img [src]="product.smallImg" class="img-fluid" [alt]="product.nombre" style="width: 400px" data-toggle="modal"
+        href="#ModalPic">
+    </figure>
+
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" data-backdrop="false" id="ModalPic" tabindex="-1" role="dialog" aria-labelledby="ModalPicCenter"
+      aria-hidden="true">
+
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">{{ product.nombre }}</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <img [src]="product.bigImg" class="img-fluid" [alt]="product.nombre" style="width: 700px">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+
+  </div>
+</div>

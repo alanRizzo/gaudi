@@ -1,1 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+#map {
+    margin-top: 0px;
+}
+
+#contactSend {
+    margin-top: 42px;
+}
+
+#gaudi {
+    width: 50%;
+}
+
+#logo_gaudi {
+    width: 20%;
+}
+
+.top-box {
+    margin-top: 15px;
+}
+
+.top-big-box {
+    margin-top: 35px;
+}
+
+.right-box {
+    padding-right: 20px;
+}
+
+#mapG{
+    height: 360px;
+}
+  

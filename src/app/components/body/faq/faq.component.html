@@ -1,0 +1,22 @@
+<div class="title">
+  <h2>Preguntas Frecuentes</h2>
+</div>
+<h3>Algunas de las dudas más comunes, te las despejamos acá.</h3>
+<br>
+
+<div class="card card-nav-tabs" style="margin-top: 55px;" *ngFor="let question of faq">
+
+  <!--Card header -->
+  <div class="card-header card-header-primary">
+    {{ question.pregunta }}
+  </div>
+  <!--Card header -->
+
+  <!--Card body -->  
+  <div class="card-body">
+    <p class="card-text" style="white-space:pre-wrap">{{ question.respuesta }}</p>
+  </div>
+
+  <!-- Card body -->
+
+</div>
