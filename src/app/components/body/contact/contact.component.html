@@ -1,111 +1,114 @@
-<div class="title">
-  <h2>Contactanos</h2>
-</div>
-<br>
+<div class="section section-basic">
+  <div class="container">
+    <div class="title">
+      <h2>Contactanos</h2>
+    </div>
+    <br>
 
-<!--Grid row-->
-<div #target class="row">
+    <!--Grid row-->
+    <div #target class="row">
 
-  <!--Grid column-->
-  <div class="col-lg-5 col-md-12">
-    <!-- Form contact -->
-    <form [formGroup]="contactForm" (ngSubmit)="sendContactForm(target)">
-      <div [hidden]="submitted">
-        <div class="form-group bmd-form-group">
-          <label class="bmd-label-floating">Tu nombre</label>
-          <input 
-            formControlName="nombre" 
-            type="text" 
-            class="form-control">
-        </div>
-        <div class="form-group bmd-form-group">
-          <label class="bmd-label-floating">Tu email</label>
-          <input 
-            formControlName="email" 
-            type="email" 
-            class="form-control">
-        </div>
-        <div class="form-group bmd-form-group">
-          <label class="bmd-label-floating">Asunto</label>
-          <input 
-            formControlName="asunto" 
-            type="text" 
-            class="form-control">
-        </div>
-        <div class="form-group bmd-form-group">
-          <label class="bmd-label-floating">Tu mensaje</label>
-          <textarea 
-            formControlName="mensaje" 
-            type="text" 
-            class="form-control"></textarea>
-        </div>
+      <!--Grid column-->
+      <div class="col-lg-5 col-md-12">
+        <!-- Form contact -->
+        <form [formGroup]="contactForm" (ngSubmit)="sendContactForm(target)">
+          <div [hidden]="submitted">
+            <div class="form-group bmd-form-group">
+              <label class="bmd-label-floating">Tu nombre</label>
+              <input 
+                formControlName="nombre" 
+                type="text" 
+                class="form-control">
+            </div>
+            <div class="form-group bmd-form-group">
+              <label class="bmd-label-floating">Tu email</label>
+              <input 
+                formControlName="email" 
+                type="email" 
+                class="form-control">
+            </div>
+            <div class="form-group bmd-form-group">
+              <label class="bmd-label-floating">Asunto</label>
+              <input 
+                formControlName="asunto" 
+                type="text" 
+                class="form-control">
+            </div>
+            <div class="form-group bmd-form-group">
+              <label class="bmd-label-floating">Tu mensaje</label>
+              <textarea 
+                formControlName="mensaje" 
+                type="text" 
+                class="form-control"></textarea>
+            </div>
 
-        <div class="text-center">
-          <br>
-          <button type="submit" class="btn btn-primary btn-round">Enviar</button>
-        </div>
-      </div>
-      <div *ngIf="submitted">
-        <div class="form-group bmd-form-group">
-          <h3>Gracias {{ contactForm.value.nombre }},</h3> 
-          <h4>por escribirnos en breve nos pondremos en contacto contigo.</h4>
-          <div class="text-center">
-            <br>
-            <button class="btn btn-primary btn-round" (click)="contactResetForm()">Mandar otro comentario</button>
+            <div class="text-center">
+              <br>
+              <button type="submit" class="btn btn-primary btn-round">Enviar</button>
+            </div>
           </div>
+          <div *ngIf="submitted">
+            <div class="form-group bmd-form-group">
+              <h3>Gracias {{ contactForm.value.nombre }},</h3> 
+              <h4>por escribirnos en breve nos pondremos en contacto contigo.</h4>
+              <div class="text-center">
+                <br>
+                <button class="btn btn-primary btn-round" (click)="contactResetForm()">Mandar otro comentario</button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <!-- Form contact -->
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-lg-7 col-md-12">
+        <!--Grid row-->
+        <div class="row text-center">
+
+          <!--Grid column-->
+          <div class="col-lg-4 col-md-4 mb-3">
+            <p>
+              <a href="https://www.google.com.ar/maps/place/Gaud%C3%AD+Gr%C3%A1fica+y+Librer%C3%ADa+T%C3%A9cnica/@-31.4277766,-64.191176,17z/data=!4m13!1m7!3m6!1s0x9432a28eca91a0dd:0xab8b7af0df4945bb!2sIndependencia+1036,+X5000IUV+C%C3%B3rdoba!3b1!8m2!3d-31.4277812!4d-64.1889873!3m4!1s0x9432a28ecca7e4c1:0x12099fdba69c7da1!8m2!3d-31.4277683!4d-64.1892832">
+                <i class="fa fa-map fa-1x mr-2 grey-text"></i>
+                Independencia 1036</a>
+            </p>
+          </div>
+          <!--Grid column-->
+
+          <!--Grid column-->
+          <div class="col-lg-5 col-md-5 mb-3">
+            <p>
+              <a href="mailto:gaudiploteos@gmail.com"><i class="fa fa-envelope fa-1x mr-2 grey-text"></i>
+              gaudiploteos@gmail.com</a>
+            </p>
+          </div>
+          <!--Grid column-->
+
+          <!--Grid column-->
+          <div class="col-lg-3 col-md-3 mb-3">
+            <p>
+              <a href="tel:+543514604806"><i class="fa fa-phone fa-1x mr-2 grey-text"></i>
+              0351 - 4604806</a>
+            </p>
+          </div>
+          <!--Grid column-->
+
         </div>
-      </div>
-    </form>
-    <!-- Form contact -->
-  </div>
-  <!--Grid column-->
+        <!--Grid row-->
 
-  <!--Grid column-->
-  <div class="col-lg-7 col-md-12">
-    <!--Grid row-->
-    <div class="row text-center">
+        <!--Grid row-->
+        <div class="map" id="mapG" 
+          leaflet
+          [leafletOptions]="options">
+        </div>
+        <!--Grid row-->
 
-      <!--Grid column-->
-      <div class="col-lg-4 col-md-4 mb-3">
-        <p>
-          <a href="https://www.google.com.ar/maps/place/Gaud%C3%AD+Gr%C3%A1fica+y+Librer%C3%ADa+T%C3%A9cnica/@-31.4277766,-64.191176,17z/data=!4m13!1m7!3m6!1s0x9432a28eca91a0dd:0xab8b7af0df4945bb!2sIndependencia+1036,+X5000IUV+C%C3%B3rdoba!3b1!8m2!3d-31.4277812!4d-64.1889873!3m4!1s0x9432a28ecca7e4c1:0x12099fdba69c7da1!8m2!3d-31.4277683!4d-64.1892832">
-            <i class="fa fa-map fa-1x mr-2 grey-text"></i>
-          </a>
-          Independencia 1036
-        </p>
-      </div>
-      <!--Grid column-->
-
-      <!--Grid column-->
-      <div class="col-lg-5 col-md-5 mb-3">
-        <p>
-          <a href="mailto:gaudiploteos@gmail.com"><i class="fa fa-envelope fa-1x mr-2 grey-text"></i></a>
-          gaudiploteos@gmail.com
-        </p>
-      </div>
-      <!--Grid column-->
-
-      <!--Grid column-->
-      <div class="col-lg-3 col-md-3 mb-3">
-        <p>
-          <a href="tel:+543514604806"><i class="fa fa-phone fa-1x mr-2 grey-text"></i></a>
-          0351 - 4604806
-        </p>
       </div>
       <!--Grid column-->
 
     </div>
     <!--Grid row-->
-
-    <!--Grid row-->
-    <div class="map" id="mapG" 
-      leaflet
-      [leafletOptions]="options">
-    </div>
-    <!--Grid row-->
-
   </div>
-  <!--Grid column-->
-
 </div>
-<!--Grid row-->

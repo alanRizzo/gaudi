@@ -1,12 +1,37 @@
 <!-- Productos Section -->
 <div class="main main-raised">
-  <div class="section section-basic">
-    <div class="container">
-      <app-products id="products"></app-products>
-      <app-tesis id="tesis"></app-tesis>
-      <app-faq id="faq"></app-faq>
-      <app-contact id="contact"></app-contact>
+  <app-products id="products" (selectedProduct)="theProduct($event)"></app-products>
+  <app-tesis id="tesis"></app-tesis>
+  <app-faq id="faq"></app-faq>
+  <app-contact id="contact"></app-contact>
+</div>
+
+<!-- Modal -->
+<div *ngIf="idMod" class="modal fade bd-example-modal-lg" [id]="idMod" tabindex="-1" role="dialog" aria-labelledby="ModalProductCenter"
+  aria-hidden="true">
+
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="card card-signup card-plain">
+        <div class="modal-header">
+          <div class="card-header card-header-primary text-center">
+            <h4>{{ product.nombre }}</h4>
+          </div>
+          <div class="top-box">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-body text-center">
+        <img [src]="product.bigImg" class="img-fluid" [alt]="product.nombre" style="width: 600px">
+      </div>
+      <div class="modal-footer justify-content-center">
+        <p>{{ product.info }}</p>
+      </div>
     </div>
   </div>
 </div>
-
+<!-- Modal -->

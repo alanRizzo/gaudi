@@ -86,7 +86,6 @@ export class TesisComponent {
 
   showType( index: number, boundClasses: string[]) {
     this.showBound = index;
-    console.log(boundClasses);
 
     if ( boundClasses.includes('ng-dirty') ) {
       this.tesisForm.controls.type.reset();

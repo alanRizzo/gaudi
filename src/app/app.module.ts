@@ -1,12 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 // Servicios
 import { ProductsService } from './services/products.service';
-
+import { FaqService } from './services/faq.service';
 
 // Componentes
 import { AppComponent } from './app.component';
@@ -34,10 +35,12 @@ import { NavbarComponent } from './components/navbar/navbar.component';
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
     LeafletModule
   ],
-  providers: [ProductsService],
+  providers: [ProductsService, FaqService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

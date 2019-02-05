@@ -1,282 +1,290 @@
-<div class="title">
-  <h2 #target>Tesis</h2>
+<div class="section section-basic">
+  <div class="container">
+    <div class="title">
+      <h2 #target>Tesis</h2>
+    </div>
+    <h3>Llená el formulario para presupuestar tu tesis.</h3>
+    <br>
+      <!-- Extended material form grid -->
+      <form [formGroup]="tesisForm" (ngSubmit)=sendBudgetForm(target)>
+        <div [hidden]="submitted">
+          <!-- Grid row  -->
+          <div class="form-row">
+
+            <!-- Grid column -->
+            <div class="col-md-4">
+              <div class="form-group bmd-form-group right-box">
+                <label class="bmd-label-floating" for="inputName">Nombre</label>
+                <input 
+                  formControlName="name" 
+                  type="text" 
+                  class="form-control validate">
+              </div>
+              <div class="form-group bmd-form-group right-box">
+                <label class="bmd-label-floating" for="inputEmail">Email</label>
+                <input 
+                  formControlName="email" 
+                  type="email" 
+                  class="form-control validate">
+              </div>
+              <div class="form-group bmd-form-group right-box">
+                <label class="bmd-label-floating" for="inputPhone">Teléfono</label>
+                <input 
+                  formControlName="telephone" 
+                  type="tel" 
+                  class="form-control validate">
+              </div>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-4">
+              <h4>Cantidad</h4>
+              <div class="form-check form-check-radio form-check-inline" *ngFor="let copies of nCopies">
+                <label class="form-check-label">
+                  <input 
+                    formControlName="copies"
+                    class="form-check-input" 
+                    type="radio" 
+                    [value]="copies"> {{ copies }}
+                  <span class="circle">
+                    <span class="check"></span>
+                  </span>
+                </label>
+              </div>
+              <br>
+              <h4 class="top-box">Orientación</h4>
+              <div class="form-check form-check-radio form-check-inline" *ngFor="let orientation of tOrientation">
+                <label class="form-check-label">
+                  <input 
+                    formControlName="orientation" 
+                    class="form-check-input" 
+                    type="radio" 
+                    [value]="orientation"> {{ orientation }}
+                  <span class="circle">
+                    <span class="check"></span>
+                  </span>
+                </label>
+              </div>
+              <br>
+              <h4 class="top-box">Tamaño</h4>
+              <div class="form-check form-check-radio form-check-inline" *ngFor="let size of pSize">
+                <label class="form-check-label">
+                  <input
+                    formControlName="size" 
+                    class="form-check-input" 
+                    type="radio" 
+                    [value]="size"> {{ size }}
+                  <span class="circle">
+                    <span class="check"></span>
+                  </span>
+                </label>  
+              </div>          
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-4">
+              <h4>Papel</h4>
+              <div class="form-check form-check-radio form-check-inline" *ngFor="let paper of tPaper">
+                <label class="form-check-label">
+                  <input 
+                    formControlName="paper" 
+                    class="form-check-input"
+                    type="radio"
+                    [value]="paper"> {{ paper }}
+                  <span class="circle">
+                    <span class="check"></span>
+                  </span>
+                </label>  
+              </div>
+              <br>
+              <h4 class="top-box">Encuadernado</h4>
+              <div class="form-check form-check-radio form-check-inline" *ngFor="let bound of tBound; index as i">
+                <label class="form-check-label">
+                  <input
+                    #iBound 
+                    formControlName="bound"
+                    class="form-check-input" 
+                    type="radio"
+                    (click)="showType(i, iBound.className)"
+                    [value]="bound"> {{ bound }}
+                  <span class="circle">
+                    <span class="check"></span>
+                  </span>
+                </label>
+              </div>
+            </div>
+            <!-- Grid column -->
+
+          </div>
+          <!-- Grid row -->
+
+          <!-- Grid row ringed -->
+          <div class="form-row top-big-box" *ngIf="showBound === 1">
+            <!-- Grid column -->
+            <div class="col-md-4"  *ngFor="let ringed of tRinged; index as i">
+              <h4>{{ ringed.name }}</h4>
+                <div class="form-check form-check-radio form-check-inline">
+                  <label class="form-check-label">
+                    <input 
+                      formControlName="type"
+                      class="form-check-input" 
+                      type="radio" 
+                      (click)="showOption(i)"
+                      [value]="ringed.name"> {{ ringed.description }}
+                    <span class="circle">
+                      <span class="check"></span>
+                    </span>
+                  </label>
+                </div>
+            </div>
+            <!-- Grid column -->
+
+          </div>
+          <!-- Grid row ringed -->
+
+          <!-- Grid row sewing -->
+          <div class="form-row top-big-box" *ngIf="showBound === 0">
+      
+            <!-- Grid column -->
+            <div class="col-md-4"  *ngFor="let sewing of tSewing; index as i">
+              <h4>{{ sewing.name }}</h4>
+                <div class="form-check form-check-radio form-check-inline">
+                  <label class="form-check-label">
+                    <input 
+                      formControlName="type"
+                      class="form-check-input" 
+                      type="radio" 
+                      (click)="showOption(i)"
+                      [value]="sewing.name"> {{ sewing.description }}
+                    <span class="circle">
+                      <span class="check"></span>
+                    </span>
+                  </label>
+                </div>
+            </div>
+            <!-- Grid column -->
+      
+          </div>
+          <!-- Grid row sewing -->
+
+          <!-- Grid row -->
+          <div class="form-row top-big-box">
+
+            <!-- Grid column -->
+            <div class="text-center col-md-12" *ngIf="showModel">
+
+              <a href="documentos/modelo_tapa_ploteada_a.pdf" *ngIf="printed" target="_blank">
+                <button type="button" class="btn btn-default btn-round" data-toggle="tooltip" data-placement="bottom" title="Descarga el modelo guía">
+                  <i class="fa fa-download"></i> Modelo tapa
+                </button>
+              </a>
+              <a href="documentos/modelo_tapa_ploteada_a.pdf" *ngIf="impressed" target="_blank">
+                <button type="button" class="btn btn-default btn-round" data-toggle="tooltip" data-placement="bottom" title="Descarga el modelo guía">
+                  <i class="fa fa-download"></i> Modelo tapa
+                </button>
+              </a>  
+
+   
+
+              <div class="form-group form-file-upload top-big-box right-box">
+                <input type="file" class="inputFileHidden">
+                <div class="input-group">
+                  <input type="text" class="form-control inputFileVisible" placeholder="Adjuntar diseño de portada en PDF">
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-fab btn-round btn-primary">
+                      <i class="material-icons">attach_file</i>
+                    </button>
+                  </span>
+                </div>
+              </div>
+              
+              <h6 class="text-center right-box"><small>Tamaño máximo 2 megas</small></h6>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-12" *ngIf="impressed">
+              <h4>Color cuerina</h4>
+              <div class="form-check form-check-radio form-check-inline" *ngFor="let color of letherColor">
+                <label class="form-check-label">
+                  <input 
+                    formControlName="colorLether" 
+                    class="form-check-input"
+                    type="radio"
+                    [value]="color"> {{ color }}
+                  <span class="circle">
+                    <span class="check"></span>
+                  </span>
+                </label>  
+              </div>
+            </div>
+            <!-- Grid column -->
+              
+            <!-- Grid column -->
+            <div class="col-md-12" *ngIf="impressed">
+              <h4>Color grabado</h4>
+              <div class="form-check form-check-radio form-check-inline" *ngFor="let color of impressedColor">
+                <label class="form-check-label">
+                  <input 
+                    formControlName="colorImpressed" 
+                    class="form-check-input"
+                    type="radio"
+                    [value]="color"> {{ color }}
+                  <span class="circle">
+                    <span class="check"></span>
+                  </span>
+                </label>  
+              </div>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="text-center col-md-12" *ngIf="showBound !== null">
+              <div class="form-group form-file-upload top-big-box right-box">
+                <input type="file" class="inputFileHidden">
+                <div class="input-group">
+                  <input type="text" class="form-control inputFileVisible" placeholder="Adjuntar trabajo en PDF">
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-fab btn-round btn-primary">
+                      <i class="material-icons">attach_file</i>
+                    </button>
+                  </span>
+                </div>
+              </div>
+              <h6 class="text-center right-box"><small>Tamaño máximo 10 megas</small></h6>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-12" *ngIf="showBound !== null">
+              <div class="form-group">
+                <h4>Comentarios y observaciones</h4>
+                <label>Escribe aquí los detalles de tu trabajo a tener en cuenta</label>
+                <textarea formControlName="comment" class="form-control right-box" rows="1"></textarea>
+              </div>
+              <br>
+              <div class="text-center">
+                <button id="tesisSend" type="submit" class="btn btn-primary btn-round">Enviar</button>
+              </div>
+            </div>
+            <!-- Grid column -->
+          </div>
+          <!-- Grid row -->
+        </div>
+        <div *ngIf="submitted">
+          <div class="form-group bmd-form-group">
+            <h3>Gracias {{ tesisForm.value.name | titlecase }} por escribirnos,</h3> 
+            <h4>en breve nos pondremos en contacto contigo.</h4>
+            <div class="text-center">
+              <br>
+              <button class="btn btn-primary btn-round" (click)="budgetResetForm()">Mandar otra tesis</button>
+            </div>
+          </div>
+        </div>
+
+      </form>
+      <!-- Extended material form grid -->
+  </div>
 </div>
-<h3>Llená el formulario para presupuestar tu tesis.</h3>
-<br>
-  <!-- Extended material form grid -->
-  <form [formGroup]="tesisForm" (ngSubmit)=sendBudgetForm(target)>
-    <div [hidden]="submitted">
-      <!-- Grid row  -->
-      <div class="form-row">
-
-        <!-- Grid column -->
-        <div class="col-md-4">
-          <div class="form-group bmd-form-group right-box">
-            <label class="bmd-label-floating" for="inputName">Nombre</label>
-            <input 
-              formControlName="name" 
-              type="text" 
-              class="form-control validate">
-          </div>
-          <div class="form-group bmd-form-group right-box">
-            <label class="bmd-label-floating" for="inputEmail">Email</label>
-            <input 
-              formControlName="email" 
-              type="email" 
-              class="form-control validate">
-          </div>
-          <div class="form-group bmd-form-group right-box">
-            <label class="bmd-label-floating" for="inputPhone">Teléfono</label>
-            <input 
-              formControlName="telephone" 
-              type="tel" 
-              class="form-control validate">
-          </div>
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-md-4">
-          <h4>Cantidad</h4>
-          <div class="form-check form-check-radio form-check-inline" *ngFor="let copies of nCopies">
-            <label class="form-check-label">
-              <input 
-                formControlName="copies"
-                class="form-check-input" 
-                type="radio" 
-                [value]="copies"> {{ copies }}
-              <span class="circle">
-                <span class="check"></span>
-              </span>
-            </label>
-          </div>
-          <br>
-          <h4 class="top-box">Orientación</h4>
-          <div class="form-check form-check-radio form-check-inline" *ngFor="let orientation of tOrientation">
-            <label class="form-check-label">
-              <input 
-                formControlName="orientation" 
-                class="form-check-input" 
-                type="radio" 
-                [value]="orientation"> {{ orientation }}
-              <span class="circle">
-                <span class="check"></span>
-              </span>
-            </label>
-          </div>
-          <br>
-          <h4 class="top-box">Tamaño</h4>
-          <div class="form-check form-check-radio form-check-inline" *ngFor="let size of pSize">
-            <label class="form-check-label">
-              <input
-                formControlName="size" 
-                class="form-check-input" 
-                type="radio" 
-                [value]="size"> {{ size }}
-              <span class="circle">
-                <span class="check"></span>
-              </span>
-            </label>  
-          </div>          
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-md-4">
-          <h4>Papel</h4>
-          <div class="form-check form-check-radio form-check-inline" *ngFor="let paper of tPaper">
-            <label class="form-check-label">
-              <input 
-                formControlName="paper" 
-                class="form-check-input"
-                type="radio"
-                [value]="paper"> {{ paper }}
-              <span class="circle">
-                <span class="check"></span>
-              </span>
-            </label>  
-          </div>
-          <br>
-          <h4 class="top-box">Encuadernado</h4>
-          <div class="form-check form-check-radio form-check-inline" *ngFor="let bound of tBound; index as i">
-            <label class="form-check-label">
-              <input 
-                formControlName="bound"
-                class="form-check-input" 
-                type="radio"
-                #boundClasses
-                (click)="showType(i)"
-                [value]="bound"> {{ bound }}
-              <span class="circle">
-                <span class="check"></span>
-              </span>
-            </label>
-          </div>
-        </div>
-        <!-- Grid column -->
-
-      </div>
-      <!-- Grid row -->
-
-      <!-- Grid row ringed -->
-      <div class="form-row top-big-box" *ngIf="showBound === 0">
-        <!-- Grid column -->
-        <div class="col-md-4"  *ngFor="let ringed of tRinged; index as i">
-          <h4>{{ ringed.name }}</h4>
-            <div class="form-check form-check-radio form-check-inline">
-              <label class="form-check-label">
-                <input 
-                  formControlName="type"
-                  class="form-check-input" 
-                  type="radio" 
-                  (click)="showOption(i)"
-                  [value]="ringed.name"> {{ ringed.description }}
-                <span class="circle">
-                  <span class="check"></span>
-                </span>
-              </label>
-            </div>
-        </div>
-        <!-- Grid column -->
-
-      </div>
-      <!-- Grid row ringed -->
-
-      <!-- Grid row sewing -->
-      <div class="form-row top-big-box" *ngIf="showBound === 1">
-  
-        <!-- Grid column -->
-        <div class="col-md-4"  *ngFor="let sewing of tSewing; index as i">
-          <h4>{{ sewing.name }}</h4>
-            <div class="form-check form-check-radio form-check-inline">
-              <label class="form-check-label">
-                <input 
-                  formControlName="type"
-                  class="form-check-input" 
-                  type="radio" 
-                  (click)="showOption(i)"
-                  [value]="sewing.name"> {{ sewing.description }}
-                <span class="circle">
-                  <span class="check"></span>
-                </span>
-              </label>
-            </div>
-        </div>
-        <!-- Grid column -->
-  
-      </div>
-      <!-- Grid row sewing -->
-
-      <!-- Grid row -->
-      <div class="form-row top-big-box">
-
-        <!-- Grid column -->
-        <div class="text-center col-md-12" *ngIf="showModel">
-
-          <a href="documentos/modelo_tapa_ploteada_a.pdf" *ngIf="printed" target="_blank">
-            <button type="button" class="btn btn-default btn-round" data-toggle="tooltip" data-placement="bottom" title="Descarga el modelo guía">
-              <i class="fa fa-download"></i> Modelo tapa
-            </button>
-          </a>
-          <a href="documentos/modelo_tapa_ploteada_a.pdf" *ngIf="impressed" target="_blank">
-            <button type="button" class="btn btn-default btn-round" data-toggle="tooltip" data-placement="bottom" title="Descarga el modelo guía">
-              <i class="fa fa-download"></i> Modelo tapa
-            </button>
-          </a>          
-          <div class="form-group form-file-upload top-big-box right-box">
-            <input type="file" class="inputFileHidden">
-            <div class="input-group">
-              <input type="text" class="form-control inputFileVisible" placeholder="Adjuntar diseño de portada en PDF">
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-fab btn-round btn-primary">
-                  <i class="material-icons">attach_file</i>
-                </button>
-              </span>
-            </div>
-          </div>
-          <h6 class="text-center right-box"><small>Tamaño máximo 2 megas</small></h6>
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-md-12" *ngIf="impressed">
-          <h4>Color cuerina</h4>
-          <div class="form-check form-check-radio form-check-inline" *ngFor="let color of letherColor">
-            <label class="form-check-label">
-              <input 
-                formControlName="colorLether" 
-                class="form-check-input"
-                type="radio"
-                [value]="color"> {{ color }}
-              <span class="circle">
-                <span class="check"></span>
-              </span>
-            </label>  
-          </div>
-        </div>
-        <!-- Grid column -->
-          
-        <!-- Grid column -->
-        <div class="col-md-12" *ngIf="impressed">
-          <h4>Color grabado</h4>
-          <div class="form-check form-check-radio form-check-inline" *ngFor="let color of impressedColor">
-            <label class="form-check-label">
-              <input 
-                formControlName="colorImpressed" 
-                class="form-check-input"
-                type="radio"
-                [value]="color"> {{ color }}
-              <span class="circle">
-                <span class="check"></span>
-              </span>
-            </label>  
-          </div>
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="text-center col-md-12" *ngIf="showBound !== null">
-          <div class="form-group form-file-upload top-big-box right-box">
-            <input type="file" class="inputFileHidden">
-            <div class="input-group">
-              <input type="text" class="form-control inputFileVisible" placeholder="Adjuntar trabajo en PDF">
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-fab btn-round btn-primary">
-                  <i class="material-icons">attach_file</i>
-                </button>
-              </span>
-            </div>
-          </div>
-          <h6 class="text-center right-box"><small>Tamaño máximo 10 megas</small></h6>
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-md-12" *ngIf="showBound !== null">
-          <div class="form-group">
-            <h4>Comentarios y observaciones</h4>
-            <label>Escribe aquí los detalles de tu trabajo a tener en cuenta</label>
-            <textarea formControlName="comment" class="form-control right-box" rows="1"></textarea>
-          </div>
-          <br>
-          <div class="text-center">
-            <button id="tesisSend" type="submit" class="btn btn-primary btn-round">Enviar</button>
-          </div>
-        </div>
-        <!-- Grid column -->
-      </div>
-      <!-- Grid row -->
-    </div>
-    <div *ngIf="submitted">
-      <div class="form-group bmd-form-group">
-        <h3>Gracias {{ tesisForm.value.name | titlecase }} por escribirnos,</h3> 
-        <h4>en breve nos pondremos en contacto contigo.</h4>
-        <div class="text-center">
-          <br>
-          <button class="btn btn-primary btn-round" (click)="budgetResetForm()">Mandar otra tesis</button>
-        </div>
-      </div>
-    </div>
-
-  </form>
-  <!-- Extended material form grid -->
